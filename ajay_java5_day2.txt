@@ -1,0 +1,373 @@
+SQL> create table abemp(
+  2  empno numeric(3) primary key,
+  3  emplname varchar2(20) not null,
+  4  salary numeric(8,2),
+  5  designation varchar2(20),
+  6  deptno numeric(3));
+
+Table created.
+
+SQL> create table ab2dept(
+  2  deptno numeric(3) primary key,
+  3  deptname varchar2(20) not null);
+
+Table created.
+
+SQL> alter table abemp add constraint myfk1 foreign key(deptno) references ab2dept(deptno);
+
+Table altered.
+
+SQL> insert into ab2dept values(001,'Finance');
+
+1 row created.
+
+SQL> insert into ab2dept values(002,'Accounts');
+
+1 row created.
+
+SQL> insert into ab2dept values(003,'Stores');
+
+1 row created.
+
+SQL> insert into ab2dept values(004,'Vigilance');
+
+1 row created.
+
+SQL> insert into ab2dept values(005,'Electricals');
+
+1 row created.
+
+SQL> insert into abemp values(211,'Adarsh',25000,'Junior',002);
+
+1 row created.
+
+SQL> insert into abemp values(235,'Suraj',35000,'Junior',004);
+
+1 row created.
+
+SQL> insert into abemp values(296,'Shreya',25000,'Junior',005);
+
+1 row created.
+
+SQL> insert into abemp values(167,'Vineeth',65000,'Senior',001);
+
+1 row created.
+
+SQL> insert into abemp values(143,'Rikhil',55000,'Senior',003);
+
+1 row created.
+
+SQL> select* from abemp;
+
+     EMPNO EMPLNAME                 SALARY DESIGNATION              DEPTNO
+---------- -------------------- ---------- -------------------- ----------
+       211 Adarsh                    25000 Junior                        2
+       235 Suraj                     35000 Junior                        4
+       296 Shreya                    25000 Junior                        5
+       167 Vineeth                   65000 Senior                        1
+       143 Rikhil                    55000 Senior                        3
+
+SQL> select*from ab2dept;
+
+    DEPTNO DEPTNAME
+---------- --------------------
+         1 Finance
+         2 Accounts
+         3 Stores
+         4 Vigilance
+         5 Electricals
+
+
+
+
+SQL> select*from stud;
+
+SID   SNAME                DOB       DOJ
+----- -------------------- --------- ---------
+1     Mathew               04-JUN-70 15-JUL-18
+2     Mike                 03-MAR-78 14-MAY-13
+3     Ashley               23-APR-96 12-MAY-17
+
+SQL> alter table stud add email varchar2(20);
+
+Table altered.
+
+SQL> select*from stud;
+
+SID   SNAME                DOB       DOJ       EMAIL
+----- -------------------- --------- --------- --------------------
+1     Mathew               04-JUN-70 15-JUL-18
+2     Mike                 03-MAR-78 14-MAY-13
+3     Ashley               23-APR-96 12-MAY-17
+
+SQL> alter table stud drop coloumn email;
+alter table stud drop coloumn email
+                      *
+ERROR at line 1:
+ORA-00905: missing keyword
+
+
+SQL> alter table stud drop column email;
+
+Table altered.
+
+SQL> select*from stud;
+
+SID   SNAME                DOB       DOJ
+----- -------------------- --------- ---------
+1     Mathew               04-JUN-70 15-JUL-18
+2     Mike                 03-MAR-78 14-MAY-13
+3     Ashley               23-APR-96 12-MAY-17
+
+
+SQL> alter table stud add constraint snameconstraint check (sname in('Mathew' ,'Mike','Ashley'));
+
+Table altered.
+
+SQL> alter table stud drop constraint snameconstraint;
+
+Table altered.
+
+
+SQL> create table section(
+  2  sectionid number(3)  constraint sid check(sectionid>0),
+  3  sectionname char(30)  constraint sname not null,
+  4  bookcount number(6),
+  5  constraint sectprime primary key( sectionid));
+
+Table created.
+
+SQL> create table bookt(
+  2  isbn number(10) constraint bisbn check(isbn between 1 and 2000),
+  3  title varchar2(200) constraint btitle not null,
+  4  author varchar2(50) constraint bauth not null,
+  5  lentdate date,
+  6  returneddate date,
+  7  timeslent number(6),
+  8  sectionid number(3),
+  9  constraint bookprime primary key(isbn),
+ 10  constraint booksect foreign key(sectionid) references section(sectionid) on delete cascade);
+
+Table created.
+
+
+SQL> insert into section values(2,'xyz',65);
+
+1 row created.
+
+SQL> insert into bookt values(1,'java','james',to_date('3/3/09','mm/dd/yy'),to_date('2/4/09','mm/dd/yy'),10,1);
+
+1 row created.
+
+SQL> select*from section;
+
+ SECTIONID SECTIONNAME                     BOOKCOUNT
+---------- ------------------------------ ----------
+         1 ABC                                    78
+         2 xyz                                    65
+
+SQL> select*from bookt;
+
+      ISBN
+----------
+TITLE
+--------------------------------------------------------------------------------
+AUTHOR                                             LENTDATE  RETURNEDD
+-------------------------------------------------- --------- ---------
+ TIMESLENT  SECTIONID
+---------- ----------
+         1
+java
+james                                              03-MAR-09 04-FEB-09
+        10          1
+
+
+SQL> delete from section where sectionid=1;
+
+1 row deleted.
+
+SQL> select*from section;
+
+ SECTIONID SECTIONNAME                     BOOKCOUNT
+---------- ------------------------------ ----------
+         2 xyz                                    65
+
+SQL> select*from bookt;
+
+no rows selected
+
+SQL> insert into stu values(&roll,'&name');
+Enter value for roll: 12
+Enter value for name: Ahmed
+old   1: insert into stu values(&roll,'&name')
+new   1: insert into stu values(12,'Ahmed')
+
+1 row created.
+
+SQL> insert into stu values(&roll,'&name');
+Enter value for roll: 14
+Enter value for name: Vardy
+old   1: insert into stu values(&roll,'&name')
+new   1: insert into stu values(14,'Vardy')
+
+1 row created.
+
+SQL> insert into stu values(&roll,'&name');
+Enter value for roll: 17
+Enter value for name: Mahrez
+old   1: insert into stu values(&roll,'&name')
+new   1: insert into stu values(17,'Mahrez')
+
+1 row created.
+
+SQL> insert into fees values(&roll,&amount);
+Enter value for roll: 17
+Enter value for amount: 500
+old   1: insert into fees values(&roll,&amount)
+new   1: insert into fees values(17,500)
+
+1 row created.
+
+SQL> insert into fees values(&roll,&amount);
+Enter value for roll: 14
+Enter value for amount: 5000
+old   1: insert into fees values(&roll,&amount)
+new   1: insert into fees values(14,5000)
+
+1 row created.
+
+SQL> insert into fees values(&roll,&amount);
+Enter value for roll: 12
+Enter value for amount: 7880
+old   1: insert into fees values(&roll,&amount)
+new   1: insert into fees values(12,7880)
+
+1 row created.
+
+SQL> select*from stu;
+
+      ROLL NAME
+---------- --------------------
+        12 Ahmed
+        14 Vardy
+        17 Mahrez
+
+SQL> select*from fees;
+
+      ROLL     AMOUNT
+---------- ----------
+        17        500
+        14       5000
+        12       7880
+
+SQL> select name from stu where roll=(select roll from fees where amount=5000);
+
+NAME
+--------------------
+Vardy
+
+
+SQL> select*from emps;
+
+    DEPTNO     SALARY
+---------- ----------
+         1         10
+         1         20
+         1         50
+         1         60
+         2         40
+         2         50
+         2         90
+         2        100
+
+
+SQL> delete from emps a where a.salary=(select max(salary) from emps b where a.deptno=b.deptno);
+
+2 rows deleted.
+
+SQL> delete from emps a where a.salary=(select max(salary) from emps b where a.deptno=b.deptno);
+
+2 rows deleted.
+
+
+create table Suppliers( supplier_id varchar(20),supplier_name varchar(20))
+/
+
+create table Orders
+(
+  order_id varchar(20),
+   supplier_id varchar(20),
+   order_date date
+)
+/
+
+insert into Suppliers values('10000','IBM')
+insert into Suppliers values('10001','Hewlett Packard')
+insert into Suppliers values('10002','Microsoft')
+insert into Suppliers values('10003','TCS')
+
+insert into Orders values('1','10000',to_date('3/3/09','mm/dd/yy'))
+insert into Orders values('2','10000',to_date('7/5/10','mm/dd/yy'))
+insert into Orders values('3','10001',to_date('12/8/10','mm/dd/yy'))
+
+
+SQL> select order_id,supplier_name,a.supplier_id from orders a right outer join suppliers b on  a.supplier_id=b.supplier_id;
+
+ORDER_ID             SUPPLIER_NAME        SUPPLIER_ID
+-------------------- -------------------- --------------------
+1                    IBM                  10000
+2                    IBM                  10000
+3                    Hewlett Packard      10001
+                     Microsoft
+                     TCS
+
+
+
+
+public class Hello {
+
+
+		// TODO Auto-generated method stub
+//System.out.print(arg);
+	
+	
+	public void accept()
+	{
+		System.out.println("Accept called");
+		Hello hello=new Hello();
+		hello.display();
+		
+	}
+	public void display()
+	{
+	System.out.println("Hello is called");
+	}
+	
+	
+	public static void main(String[] args) {
+	Hello h=new Hello();
+	System.out.println("Hello main is called");
+	h.display();
+	
+	h.accept();
+	}}
+	
+	
+	class How{
+		public void hi()
+		{
+			System.out.println("Hi belongs to how class");
+
+			
+		}
+		
+		
+		public static void main(String args[]) {
+			System.out.println("Hi i am from how main");
+		}
+	}
+
+	
+
+	
+

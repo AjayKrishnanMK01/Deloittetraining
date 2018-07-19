@@ -1,0 +1,330 @@
+SQL> create table  stud(
+  2  sid char(5),
+  3  sname varchar(20),
+  4  dob date,
+  5  doj date);
+
+
+SQL> select* from stud;
+
+no rows selected
+
+SQL> insert into stud values('1', 'Mathew','04-JUN-1970','15-JUL-2018');
+
+1 row created.
+
+SQL> insert into stud values('2', 'Mike','03-MAR-1978','14-MAY-2013');
+
+1 row created.
+
+SQL> insert into stud values('3', 'Ashley','23-APR-1996','12-MAY-2017');
+
+1 row created.
+
+SQL>
+SQL> SELECT NAME,TO_NUMBER(ROLL)*9 FROM STUDENT;
+
+NAME                 TO_NUMBER(ROLL)*9
+-------------------- -----------------
+Tufail                               9
+Amit                                18
+Tarun                               27
+
+SQL> select months_between(dob,doj)/12 from stud;
+
+MONTHS_BETWEEN(DOB,DOJ)/12
+--------------------------
+                -48.112903
+                -35.196237
+                -21.053763
+
+SQL> select last_day('01-FEB-07') FROM DUAL;
+
+LAST_DAY(
+---------
+28-FEB-07
+
+SQL> select MONTHS_BETWEEN(SYSDATE,'12-MAY-1996')/12 FROM DUAL;
+
+MONTHS_BETWEEN(SYSDATE,'12-MAY-1996')/12
+----------------------------------------
+                              22.1777044
+
+SQL> select ROUND(months_between(sysdate,'12-MAY-1996')/12,0) FROM DUAL;
+
+ROUND(MONTHS_BETWEEN(SYSDATE,'12-MAY-1996')/12,0)
+-------------------------------------------------
+                                               22
+
+
+SQL> SELECT* FROM STUDENT;
+
+ROLL       NAME                 ADDRESS                   MARKS
+---------- -------------------- -------------------- ----------
+1          Tufail               Chennai
+2          Amit                 Chennai
+3          Tarun                Chennai                      98
+
+SQL> SELECT NVL(MARKS,0) FROM STUDENT;
+
+NVL(MARKS,0)
+------------
+           0
+           0
+          98
+
+
+SQL> SELECT NVL2(MARKS,to_number(roll*3),to_number(roll*5)) FROM STUDENT;
+
+NVL2(MARKS,TO_NUMBER(ROLL*3),TO_NUMBER(ROLL*5))
+-----------------------------------------------
+                                              5
+                                             10
+                                              9
+
+SQL> insert into student values(4,'Michael','Bangalore',78);
+
+1 row created.
+
+SQL> insert into student values(5,'Stuart','Pune',88);
+
+1 row created.
+
+SQL> insert into student values(6,'Alex','Pune',84);
+
+1 row created.
+
+SQL> insert into student values(6,'Martha','Bangalore',92);
+
+1 row created.
+
+SQL> select avg(marks) from student group by city;
+select avg(marks) from student group by city
+                                        *
+ERROR at line 1:
+ORA-00904: "CITY": invalid identifier
+
+
+SQL> select avg(marks) from student group by address;
+
+AVG(MARKS)
+----------
+        85
+        98
+        86
+
+SQL> select address,avg(marks) from student group by address;
+
+ADDRESS              AVG(MARKS)
+-------------------- ----------
+Bangalore                    85
+Chennai                      98
+Pune                         86
+
+SQL> create table studentt(
+  2  Roll varchar(10) primary key,
+  3  Name varchar(20) not null,
+  4  address varchar(20) check(address in ('Chennai','Mumbai','Kolkata')),
+  5  Marks number check (marks between 0 and 100));
+
+Table created.
+
+
+SQL> insert into studentt values('1','A','Mumbai',98);
+
+1 row created.
+
+SQL> create table loanpayment(
+  2  loanno number(4) constraint myp1 primary key,
+  3  loanstatus varchar2(10) constraint mycons1 check(loanstatus='upper'),
+  4  loanamount number(10) not null,
+  5  updatedate date default sysdate,
+  6  productkey varchar2(5));
+
+Table created.
+
+
+Create a table called Employee with the following Columns  and perform the following operations:-
+------------------------------------------------------------------------------------------------------------
+
+EmployeeID    
+EmployeeName   
+EmployeeAddress : 
+DOB
+DOJ
+Salary
+
+
+a.) Insert five records
+
+b) Retrieve all the records
+
+
+c) Retrieve the Employee name whose salary is greater than 20000
+
+d) Retrieve the Employee name whose address contains 'a' or 'p' or 'r'  as the last character
+ 
+e) Increase the Salary of all the Employee by 20%
+
+f) Delete all the employee records whose salary is less than 5000
+
+
+
+
+
+SQL> create table employee(
+  2  employeeid varchar(10) primary key,
+  3  employeename varchar(20) not null,
+  4  employeeaddress varchar(20) not null,
+  5  DOB date,
+  6  DOJ date,
+  7  Salary number);
+
+Table created.
+
+SQL> insert into employee values('1','Martha','Gurgaon','04-FEB-1970','23-MAR-2013',40000);
+
+1 row created.
+
+SQL> insert into employee values('2','Vijay','Bangalore','04-FEB-1994','23-MAR-2015',25000);
+
+1 row created.
+
+SQL> insert into employee values('2','Stweart','Antwerp','04-OCT-1984','13-SEP-2016',4500);
+insert into employee values('2','Stweart','Antwerp','04-OCT-1984','13-SEP-2016',4500)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (SCOTT.SYS_C0011066) violated
+
+
+SQL> insert into employee values('3','Stweart','Antwerp','04-OCT-1984','13-SEP-2016',4500);
+
+1 row created.
+
+SQL> insert into employee values('4','Janani','Agra','21-MAY-1996','17-JUNE-2018',30000);
+
+1 row created.
+
+SQL> insert into employee values('5','Martin','Salvador','11-AUG-1993','27-APR-2018',2000);
+
+1 row created.
+
+SQL> SELECT* FROM EMPLOYEE;
+
+EMPLOYEEID EMPLOYEENAME         EMPLOYEEADDRESS      DOB       DOJ
+---------- -------------------- -------------------- --------- ---------
+    SALARY
+----------
+1          Martha               Gurgaon              04-FEB-70 23-MAR-13
+     40000
+
+2          Vijay                Bangalore            04-FEB-94 23-MAR-15
+     25000
+
+3          Stweart              Antwerp              04-OCT-84 13-SEP-16
+      4500
+
+
+EMPLOYEEID EMPLOYEENAME         EMPLOYEEADDRESS      DOB       DOJ
+---------- -------------------- -------------------- --------- ---------
+    SALARY
+----------
+4          Janani               Agra                 21-MAY-96 17-JUN-18
+     30000
+
+5          Martin               Salvador             11-AUG-93 27-APR-18
+      2000
+
+
+SQL> SELECT EMPLOYEENAME FROM EMPLOYEE WHERE SALARY>20000;
+
+EMPLOYEENAME
+--------------------
+Martha
+Vijay
+Janani
+
+SQL> SELECT EMPLOYEENAME FROM EMPLOYEE WHERE ADDRESS IN ('%a','%p','%r');
+SELECT EMPLOYEENAME FROM EMPLOYEE WHERE ADDRESS IN ('%a','%p','%r')
+                                        *
+ERROR at line 1:
+ORA-00904: "ADDRESS": invalid identifier
+
+
+SQL> SELECT EMPLOYEENAME FROM EMPLOYEE WHERE employeeADDRESS IN ('%a','%p','%r');
+
+no rows selected
+
+SQL> SELECT EMPLOYEENAME FROM EMPLOYEE WHERE employeeADDRESS like "%a";
+SELECT EMPLOYEENAME FROM EMPLOYEE WHERE employeeADDRESS like "%a"
+                                                             *
+ERROR at line 1:
+ORA-00904: "%a": invalid identifier
+
+
+SQL> SELECT EMPLOYEENAME FROM EMPLOYEE WHERE employeeADDRESS like '%a';
+
+EMPLOYEENAME
+--------------------
+Janani
+
+SQL> SELECT EMPLOYEENAME FROM EMPLOYEE WHERE employeeADDRESS in('%a','%p','%r');
+
+no rows selected
+
+SQL> SELECT EMPLOYEENAME FROM EMPLOYEE WHERE employeeADDRESS like ('%a','%p','%r');
+SELECT EMPLOYEENAME FROM EMPLOYEE WHERE employeeADDRESS like ('%a','%p','%r')
+                                                                  *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> SELECT EMPLOYEENAME FROM EMPLOYEE WHERE (employeeADDRESS like '%a' or employeeaddress like '%p' or employeeaddress like '%r');
+
+EMPLOYEENAME
+--------------------
+Stweart
+Janani
+Martin
+
+SQL> update employee set salary=(salary+0.2*salary);
+
+5 rows updated.
+
+SQL> select employeename,salary from employee;
+
+EMPLOYEENAME             SALARY
+-------------------- ----------
+Martha                    48000
+Vijay                     30000
+Stweart                    5400
+Janani                    36000
+Martin                     2400
+
+SQL> delete from employee where salary<5000;
+
+1 row deleted.
+
+SQL> select*from employee;
+
+EMPLOYEEID EMPLOYEENAME         EMPLOYEEADDRESS      DOB       DOJ
+---------- -------------------- -------------------- --------- ---------
+    SALARY
+----------
+1          Martha               Gurgaon              04-FEB-70 23-MAR-13
+     48000
+
+2          Vijay                Bangalore            04-FEB-94 23-MAR-15
+     30000
+
+3          Stweart              Antwerp              04-OCT-84 13-SEP-16
+      5400
+
+
+EMPLOYEEID EMPLOYEENAME         EMPLOYEEADDRESS      DOB       DOJ
+---------- -------------------- -------------------- --------- ---------
+    SALARY
+----------
+4          Janani               Agra                 21-MAY-96 17-JUN-18
+     36000
+

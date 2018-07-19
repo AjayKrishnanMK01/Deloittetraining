@@ -1,0 +1,327 @@
+
+public class ArrTest {
+
+	public static void main(String[] args) {
+		
+		int arr[]=new int[] {1,2,3,4,5,6,7,8,9,10};
+		
+		for(int i=10;i>0;i--)
+		{
+			
+			System.out.print(arr[i]);
+	//System.out.println((i) +"\t"+ (10-i));
+		}
+		
+		// TODO Auto-generated method stub
+
+}
+}
+
+
+
+scanner and short circuit
+
+import java.util.Scanner;
+
+class CompareShortcircuits {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		
+		int i=0;
+		int j=2;
+		boolean b=(i>j)&&(j++>i);
+		System.out.println(j);
+		b=(i>j)&(j++>i);
+		System.out.print("single & " + j);
+		int weekday;
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter weekday");
+		weekday=sc.nextInt();
+		
+		switch(weekday)
+		{
+		case 1: System.out.print("Monday");
+		
+		case 2: { System.out.println("TUesday");
+			
+		}
+		
+		default: System.out.println("wrong");
+		}
+		
+		
+	}
+
+}
+
+
+
+Inheritance
+
+
+package Demo;
+
+public class Employee {
+public int empid;
+
+public Employee()
+{
+empid=10;	
+}
+
+public static void main(int[] args)
+{
+Manager m=new Manager();
+m.disp();
+
+}
+}
+
+
+class Manager extends Employee{
+	
+	int ee;
+	
+	
+
+	public void disp()
+	{
+		Employee emp=new Employee(); 
+		ee=emp.empid;
+	System.out.println(ee);
+	System.out.println(empid);
+	
+}}
+
+
+
+Access Specifiers
+
+package pack1;
+
+public class A {
+ int i;
+}
+
+package pack1;
+
+public class B extends A{
+public void display() {
+	A a=new A();
+	a.i=100;
+
+i=200;
+}
+}
+
+
+package pack1;
+
+public class C {
+	
+	public void display() {
+		A a=new A();
+		a.i=100;
+
+	i=200;
+	}
+
+}
+
+
+package pack2;
+import pack1.A;
+public class D {
+	public void display() {
+		A a=new A();
+		a.i=100;
+
+	i=200;
+	}
+}
+
+
+package pack2;
+import pack1.A;    
+public class E extends A {
+	public void display() {
+		A a=new A();
+		a.i=100;
+
+	i=200;
+	}
+}
+
+
+import java.lang.String;
+import java.lang.System;
+
+public class Demo {
+	int num1=10,num2=20;
+	public Demo(int num1,int num2) {
+			this.num1 = num2;
+			num2 = num1;
+	}
+	public void changeValues(int num1,Demo demo) {
+		this.num1++;
+		demo.num2 = --num1;
+		demo.num2 = this.num1++;
+		System.out.println(num1+this.num1+this.num2+demo.num1);
+	}
+	 public static void main(String[] args) 
+	{
+		 	int num1=100;int num2=200;
+		 	Demo demo = new Demo(100,200);
+		 	demo.changeValues(num1, demo);
+		 	System.out.println(num1+num2+demo.num1+demo.num2);
+	}
+}
+
+
+Overloading
+
+package dem;
+
+public class Cust {
+
+	int p=0;
+	public void disp(int p,int m) {
+		System.out.println("Adding two numbers:"  +p+m);
+		
+	}
+	
+	public void disp() {
+		System.out.println("No addition");
+		
+	}
+	
+	public void disp(int...num)
+	{
+		for(int i:num)
+			System.out.println(i);
+	}
+	
+	
+	
+	
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		
+		Cust cust=new Cust();
+		int arr[]=new int[] {1,2,3,4,5,6};
+		cust.disp(arr);
+		cust.disp(7,9);
+		
+		
+	}
+
+}
+
+  Assignment
+
+
+The temperatures of the cities across various countries are continuously monitored.
+A warning is displayed in cases where temperature goes beyond intolerable range.  
+The temperature will be entered either in the form of Celsius or Fahrenheit.
+The conversion formula is C=5(F-32)/19. 
+If the temperature is beyond 60 degree Celsius or below -10 degree Celsius, warning has to be displayed. 
+package monitorr;
+
+import java.util.Scanner;
+
+public class WeatherSystem {
+	
+	//public int temperature;
+	public int ch,temp;
+	
+	WeatherSystem(){}
+	WeatherSystem(int choice)  //Initializes temperature to 0 and choice given by the user
+	{
+		temp=0;
+		//this.ch=choice;
+	}
+	
+	
+	int convertTemperature(int ch)  //Converts temperature to celsius if its in Farhenit
+	{
+		int temp;
+		
+		System.out.println("Enter the temperature");  //Inputs temperature from the user
+		
+		
+		Scanner sc=new Scanner(System.in);
+		temp=sc.nextInt();
+		if(ch==1)
+		{
+			temp=temp;
+		//break;
+		}
+		if(ch==2)
+		{
+			temp=5*(temp-32)/19; 
+	//	break;
+		}
+		
+		
+		
+		
+	return temp;
+}
+	
+	void PrintStatus(int ch)  // Prints the status(warning)
+	{
+		int choice=ch;
+		int t;
+		t=convertTemperature(ch);
+		
+		
+			
+		
+		if (t<10||t>60)
+		{
+			System.out.print("Temperature is intolerable");}
+			else
+			{
+				System.out.print("The temperature is tolerable");
+			}}
+		
+	
+		
+	
+		
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int choice,tempFarhenit,tempCelsius;
+		
+		for(;;) {
+			
+			System.out.println("Celsius(1) or Farheneit(2)?");
+		Scanner sc=new Scanner(System.in);
+		choice=sc.nextInt();  //Inputs choice from user
+		
+		
+	
+	
+			if(choice==1||choice==2)
+				break;
+			else
+			{
+				System.out.println("Enter a valid choice");
+			}
+		  // object helps print staus according to the user's choice
+		
+		}
+		WeatherSystem obj1=new WeatherSystem();  //object is created
+		obj1.PrintStatus(choice);
+	}
+		
+	}
+
+
+ 
+
