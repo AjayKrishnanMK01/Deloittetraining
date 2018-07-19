@@ -1,0 +1,447 @@
+Getters setters, Constructor chaining, Refactoring
+
+package a.constructorr;
+
+public class Cusor {
+
+	
+	private int custId;
+	private int billAmount;
+	private String name;
+	
+	public Cusor()
+	{
+		custId=0;
+		billAmount=0;
+		name="";
+		
+	}
+	public int getBillAmount() {
+		return billAmount;
+	}
+	public void setBillAmount(int billAmount) {
+		this.billAmount = billAmount;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getCustId() {
+		return custId;
+	}
+	public Cusor(int custId,int billAmount ,String Name )
+	{
+		this(custId,billAmount);
+		
+	this.custId=custId;
+	this.billAmount=billAmount;
+	this.name=Name;
+			}
+	
+	
+	public Cusor(int custId,int billAmount)
+	{
+		this();
+		this.custId=230;
+		this.billAmount=450;
+		//this.Name="NA";
+	}
+	
+	public void Display()
+	{
+		System.out.println("customer id is" + custId);
+		System.out.println("Customer Name is "+ name);
+		System.out.println("Customer bill amount is"+ billAmount);
+		
+	}
+	
+	/*public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		Customerr customer=new Customerr(123,98000);
+		customer.Display();
+
+	}
+*/
+}
+
+
+
+Overriding
+
+package inheritance;
+
+
+	
+	class Men extends Animal
+	{
+		int salary;
+		public Men() {
+			age=98;
+			System.out.println("Mens cons:"+age);
+		}
+		
+		public void drink() {
+			System.out.println("Men Drink Milk");
+		}
+		
+		public void eat()
+		{
+			System.out.println("Men eat food");
+		}
+	}
+	
+  class Dog extends Animal
+	{
+		public void drink() {
+			System.out.println("Dogs Drink Milk");
+		}
+		
+		public void eat()
+		{
+			System.out.println("Dogs eat food");
+		}
+	}
+	public class Animal {
+		
+		
+		int age=100;
+		public Animal()
+		{
+			System.out.println("Animal cons"+age);
+		}
+		
+		public void eat()
+		{
+			System.out.println("Animal eats food");
+		}
+		public void drink() {
+			System.out.println("Animals Drink Milk");
+		}
+		
+		
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		/*Men m=new Men();
+		m.eat();
+		m.drink();
+		System.out.println("Dog party begins");*/
+		//Dog d=new Dog();
+		//a.e
+		Animal a=new Men();
+		a.eat();
+		a=new Dog();
+		a.eat();
+	}
+
+}
+    
+
+Abstract object
+
+package inheritance;
+
+
+abstract class Vehicle{
+	
+	int price;
+	public Vehicle()
+	{
+		System.out.println("Vehicle constructor called");
+	}
+	
+	
+	public abstract void start();
+	public abstract void stop();
+	public void music() {
+		System.out.println("Music is optional");
+	}
+}
+
+
+class Car extends Vehicle{
+	
+	@Override
+	public void start() {
+		price=900000;
+		System.out.println("Car started");;
+		
+	}
+	
+	@Override
+	public void stop()
+	{
+		System.out.println("Car stopped");
+	}
+}
+
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Vehicle v=new Car();
+		v.start();
+		v.stop();
+		
+		
+		
+		
+	}
+
+}
+
+
+\\192.168.1.51\Share 
+
+
+Private constructor for enhanced security
+
+package inheritance;
+
+
+class A
+{
+	private A() {
+	}
+	public static String dd() {
+		return "new password";
+	}}
+
+class B
+{
+	void display()
+	{
+		System.out.println("A display");;
+		
+	}
+}
+
+public class Demo {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+System.out.println(A.dd());
+	}
+
+}
+
+
+ToString
+
+package inheritance;
+
+public class Passenger {
+	
+	//Object obj;
+	int year;
+	int salary;
+	String Name;
+	public Passenger(int year,String Name,int salary)
+	{
+		this.year=year;
+		this.salary=salary;
+		this.Name=Name;
+		
+	}
+	
+	public int getYear() {
+		return year;
+	}
+	public int getSalary() {
+		return salary;
+	}
+	public String getName() {
+		return Name;
+	}
+
+	@Override
+	public String toString() {
+		return "Passenger [year=" + year + ", salary=" + salary + ", Name=" + Name + "]";
+	}
+	
+	
+
+}
+
+
+package inheritance;
+
+public class PassengerMain {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Passenger passenger1=new Passenger(1927,"Yamini",25);
+	
+		System.out.println(passenger1);
+		
+		//Passenger passenger2=new Passenger(1927,"Yamini",25);
+//		Passenger passenger3=passenger1.equals(passenger2);
+		
+		//System.out.println(passenger1.equals(passenger2));
+	}
+
+}
+
+
+Assignment
+
+
+Exercise Objective(s): Overloading
+
+Exercise: Create a class called Calculator which has 4 different methods add, diff, mul and div that accept two numbers as parameters. 
+Overload the methods such that the parameters can be of the following pattern. 
+a)	Both are of int data type. 
+b)	Both are of double data type. 
+c)	First parameter is of int data type and second parameter is of double data type. 
+d)	First parameter is of double data type and second parameter is of int data type
+
+
+     Create an object to access these methods and invoke these methods with different type of numbers and display the result in the corresponding methods.
+
+
+package day3;
+
+import java.util.Scanner;
+
+public class Calculator {
+	int num1,num2;
+	
+
+	
+	Calculator()
+	{
+		num1=0;
+		num2=0;
+	}
+	
+void add(int num1,int num2)
+{
+	System.out.println("Sum using integer"+(num1+num2));
+}
+
+void add(double num1,double num2)
+{
+	System.out.println("Sum using double"+ (num1+num2));
+}
+
+void add(int num1,double num2)
+{
+	System.out.println("Sum using integer,double"+ (num1+num2));
+}
+
+void add(double num1,int num2)
+{
+	System.out.println("Sum using double,integer"+ (num1+num2));
+}
+
+
+
+void subtract(int num1,int num2)
+{
+	System.out.println("Difference using integer"+(num1-num2));
+}
+
+void subtract(double num1,double num2)
+{
+	System.out.println("Difference using double"+ (num1-num2));
+}
+
+void subtract(int num1,double num2)
+{
+	System.out.println("Difference using integer,double"+ (num1-num2));
+}
+
+void subtract(double num1,int num2)
+{
+	System.out.println("Difference using double,integer"+ (num1-num2));
+}
+
+
+void mul(int num1,int num2)
+{
+	System.out.println("Product using integer"+(num1*num2));
+}
+
+void mul(double num1,double num2)
+{
+	System.out.println("Product using double"+ (num1*num2));
+}
+
+void mul(int num1,double num2)
+{
+	System.out.println("Product using integer,double"+ (num1*num2));
+}
+
+void mul(double num1,int num2)
+{
+	System.out.println("Product using double,integer"+ (num1*num2));
+}
+
+
+
+void div(int num1,int num2)
+{
+	System.out.println("Quotient using integer"+(num1/num2));
+}
+
+void div(double num1,double num2)
+{
+	System.out.println("Quotient using double"+ (num1/num2));
+}
+
+void div(int num1,double num2)
+{
+	System.out.println("Quotient using integer,double"+ (num1/num2));
+}
+
+void div(double num1,int num2)
+{
+	System.out.println("Quotient using double,integer"+ (num1/num2));
+}
+
+
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int num1,num2,t;
+		double numb1;
+		double numb2,d;
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter the two integers");
+		num1=sc.nextInt();
+		System.out.println("\n");
+		num2=sc.nextInt();
+		
+		Scanner sc1=new Scanner(System.in);
+		
+		System.out.println("Enter the two Doubles");
+		numb1=sc1.nextDouble();
+		System.out.println("\n");
+		numb2=sc1.nextDouble();
+		
+		Calculator ce=new Calculator();
+		ce.add(num1, num2);
+		ce.add(numb1, numb2);
+		ce.add(num1, numb2);
+		ce.add(numb1, num2);
+		ce.subtract(num1,num2);
+		ce.subtract(numb1, numb2);
+		ce.subtract(num1, numb2);
+		ce.subtract(numb1, num2);
+		ce.mul(num1, num2);
+		ce.mul(numb1, numb2);
+		ce.mul(num1, numb2);
+		ce.mul(numb1, num2);
+		ce.div(num1, num2);
+		ce.div(numb1, numb2);
+		ce.div(num1, numb2);
+		ce.div(numb1, num2);
+		
+	}
+
+}
+
